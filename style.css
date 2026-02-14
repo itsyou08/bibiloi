@@ -33,7 +33,14 @@
   --ease:   .3s cubic-bezier(.4,0,.2,1);
 }
 
-html{scroll-behavior:smooth}
+html{
+  scroll-behavior: smooth;
+}
+
+/* OVERRIDE for carousel */
+.carousel-track{
+  scroll-behavior: auto !important;
+}
 
 body{
   font-family:'Nunito',sans-serif;
@@ -525,16 +532,22 @@ body::after{
 .carousel-track {
   display: flex;
   gap: 16px;
-  overflow-x: auto;
-  
-  /* REMOVED scroll-snap-type to allow smooth JS movement */
-  scroll-behavior: auto; /* MUST stay auto for JS math to work */
-  will-change: scroll-position;
 
+  overflow-x: auto;
+  overflow-y: hidden;
+
+  scroll-behavior: auto !important;
   -webkit-overflow-scrolling: touch;
+  touch-action: pan-x;
+
   scrollbar-width: none;
   padding: 8px 24px 12px;
 }
+
+.carousel-track::-webkit-scrollbar {
+  display: none;
+}
+
 
 .carousel-track::-webkit-scrollbar {
   display: none;
